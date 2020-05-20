@@ -8,10 +8,10 @@ public class Main {
         System.out.print("Enter n: ");
         int n = input.nextInt();
         DrawGraph frame = new DrawGraph();
-        frame.CreateNodes(n);
-        frame.setSize(1500,2000);
+        frame.setTitle("Game Board");
+        frame.setSize(1200,1100);
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.CreateNodes(n);
     }
-
-
 }

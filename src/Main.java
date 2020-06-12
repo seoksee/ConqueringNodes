@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -12,6 +13,8 @@ public class Main {
         frame.setSize(1200,1100);
         frame.setVisible(true);
         frame.setResizable(false);
+        frame.setBackground(Color.BLUE);
         frame.CreateNodes(n);
+        frame.AddEdges();
     }
 }

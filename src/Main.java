@@ -13,8 +13,9 @@ public class Main {
         frame.setSize(1200,1100);
         frame.setVisible(true);
         frame.setResizable(false);
-        frame.setBackground(Color.BLUE);
+
         frame.CreateNodes(n);
         frame.AddEdges();
+        System.out.println(frame.getBackground());
     }
 }

@@ -3,6 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,16 +13,17 @@ public class DrawGraph extends JFrame {
     private ArrayList<Node> nodes = new ArrayList<Node>();
     private ArrayList<Edge> edges = new ArrayList<Edge>();
     Random rand = new Random();
+    DecimalFormat format = new DecimalFormat("0.00");
 
     public DrawGraph(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void CreateNodes (int num){
-        final float max_y = 1030.00f;
-        final float max_x = 1000.00f;
-        final float min_x = 0.00f;
-        final float min_y = 30.00f;
+        final float max_y = 1030f;
+        final float max_x = 1000f;
+        final float min_x = 0f;
+        final float min_y = 30f;
         for (int i = 0; i < num; i++) {
             float x=rand.nextFloat()*(max_x-min_x)+min_x;
             float y=rand.nextFloat()*(max_y-min_y)+min_y;
@@ -31,28 +35,19 @@ public class DrawGraph extends JFrame {
                     y=rand.nextFloat()*(max_y-min_y)+min_y;
                 }
             }
+            BigDecimal bd = new BigDecimal(x).setScale(2, RoundingMode.HALF_UP);
+            float x2 = bd.floatValue();
+//            System.out.println(x2);
+//            System.out.println("x: " + roundingFloat(x));
+//            System.out.println("y: " + roundingFloat(y));
             nodes.add(new Node(x, y));
             this.repaint();
         }
     }
 
-    public void AddEdges(){
-//        for(int i=0, j=1; i<nodes.size(); i++){
-//            if(nodes.get(i).used==false) {
-//                if (nodes.get(j).used == false) {
-//                    if (i != j) {
-//                        System.out.println("Joining " + i + " and " + j);
-//                        edges.add(new Edge(i, j));
-//                        nodes.get(i).used = true;
-//                        nodes.get(j).used = true;
-//                    }
-//                } else { //i is not used but j is used
-//                    i--;
-//                    j++;
-//                }
-//            }
-//        }
 
+
+    public void AddEdges(){
         while(edges.size() != Math.floor(nodes.size()/2)){
             int i = rand.nextInt(nodes.size());
             if(!nodes.get(i).used){
@@ -64,7 +59,7 @@ public class DrawGraph extends JFrame {
                 }
             }
         }
-        System.out.println(edges);
+
         this.repaint();
     }
 
@@ -79,24 +74,24 @@ public class DrawGraph extends JFrame {
 
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setBackground(Color.BLUE);
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
-                RenderingHints.VALUE_STROKE_PURE);
+
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_DEFAULT);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2d.setStroke(new BasicStroke(2));
         for (Node n: nodes){
-            Ellipse2D.Float circle = new Ellipse2D.Float(n.x,n.y,15.0f,15.0f);
+            Ellipse2D.Float circle = new Ellipse2D.Float((n.x-5),(n.y-5),10f,10f);
+//            g2d.drawOval((int)(n.x), (int)n.y, 15,15);
             g2d.fill(circle);
             System.out.println(n.x + ", " + n.y);
         }
 
         for (Edge e: edges){
             Shape line = new Line2D.Float(nodes.get(e.i).x, nodes.get(e.i).y, nodes.get(e.j).x, nodes.get(e.j).y);
-            System.out.println(nodes.get(e.i).x + ", " + nodes.get(e.i).y + " and " + nodes.get(e.j).x +", "+ nodes.get(e.j).y);
             g2d.draw(line);
-//            g2d.drawLine(nodes.get(e.i).x, nodes.get(e.i).y, nodes.get(e.j).x, nodes.get(e.i).y);
+//            g2d.drawLine((int)nodes.get(e.i).x, (int)nodes.get(e.i).y, (int)nodes.get(e.j).x, (int)nodes.get(e.j).y);
         }
+        g2d.setBackground(Color.BLUE);
     }
 }

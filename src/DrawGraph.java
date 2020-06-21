@@ -36,8 +36,9 @@ public class DrawGraph extends JFrame {
         }
     }
 
-    public synchronized void AddEdges(Color color){
+    public synchronized boolean AddEdges(Thread t, Color color){
         int attempt = 0;
+        while(attempt<20){
             int i = rand.nextInt(nodes.size());
             if(!nodes.get(i).used){
                 int j = rand.nextInt(nodes.size());
@@ -45,8 +46,16 @@ public class DrawGraph extends JFrame {
                     edges.add(new Edge(i, j, color));
                     nodes.get(i).used = true;
                     nodes.get(j).used = true;
+                    break;
                 }
             }
+            attempt++;
+        }
+        if(attempt>=20){
+            System.out.println(t.getName() + " has more than 20 attempts.");
+         return true;
+        }
+    return false;
     }
 
     public boolean uniqueCoordinates (float x, float y, ArrayList<Node> nodes){

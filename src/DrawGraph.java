@@ -40,14 +40,14 @@ public class DrawGraph extends JFrame {
         }
     }
 
-    public synchronized void AddEdges(){
+    public synchronized void AddEdges(Color color){
 //        while(elapsedTime< time*1000){
         int attempt = 0;
             int i = rand.nextInt(nodes.size());
             if(!nodes.get(i).used){
                 int j = rand.nextInt(nodes.size());
                 if(!nodes.get(j).used && i!=j){
-                    edges.add(new Edge(i, j));
+                    edges.add(new Edge(i, j, color));
                     nodes.get(i).used = true;
                     nodes.get(j).used = true;
                 }
@@ -55,7 +55,8 @@ public class DrawGraph extends JFrame {
 //            elapsedTime = (new Date()).getTime() - startTime;
 //        }
 //        System.out.println("Times up!");
-        this.repaint();
+
+//        this.repaint();
     }
 
     public boolean uniqueCoordinates (float x, float y, ArrayList<Node> nodes){
@@ -72,6 +73,7 @@ public class DrawGraph extends JFrame {
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         g2d.setStroke(new BasicStroke(2));
         super.paint(g2d);
         for (Node n: nodes){
@@ -82,6 +84,8 @@ public class DrawGraph extends JFrame {
 
         for (Edge e: edges){
             Shape line = new Line2D.Float(nodes.get(e.i).x, nodes.get(e.i).y, nodes.get(e.j).x, nodes.get(e.j).y);
+//            g2d.setColor(new Color(e.r, e.g, e.b).brighter());
+            g2d.setColor(e.color.brighter());
             g2d.draw(line);
 //            System.out.println("line " + e.i + " and " + e.j);
         }

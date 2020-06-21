@@ -10,13 +10,9 @@ public class DrawGraph extends JFrame {
     private ArrayList<Node> nodes = new ArrayList<Node>();
     private ArrayList<Edge> edges = new ArrayList<Edge>();
     Random rand = new Random();
-//    int time;
-//    long startTime = System.currentTimeMillis();
-//    long elapsedTime = 0L;
 
-    public DrawGraph(int time){
+    public DrawGraph(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.time = time;
     }
 
     public void CreateNodes (int num){
@@ -41,7 +37,6 @@ public class DrawGraph extends JFrame {
     }
 
     public synchronized void AddEdges(Color color){
-//        while(elapsedTime< time*1000){
         int attempt = 0;
             int i = rand.nextInt(nodes.size());
             if(!nodes.get(i).used){
@@ -52,11 +47,6 @@ public class DrawGraph extends JFrame {
                     nodes.get(j).used = true;
                 }
             }
-//            elapsedTime = (new Date()).getTime() - startTime;
-//        }
-//        System.out.println("Times up!");
-
-//        this.repaint();
     }
 
     public boolean uniqueCoordinates (float x, float y, ArrayList<Node> nodes){
@@ -84,10 +74,8 @@ public class DrawGraph extends JFrame {
 
         for (Edge e: edges){
             Shape line = new Line2D.Float(nodes.get(e.i).x, nodes.get(e.i).y, nodes.get(e.j).x, nodes.get(e.j).y);
-//            g2d.setColor(new Color(e.r, e.g, e.b).brighter());
             g2d.setColor(e.color.brighter());
             g2d.draw(line);
-//            System.out.println("line " + e.i + " and " + e.j);
         }
     }
 }

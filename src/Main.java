@@ -26,7 +26,7 @@ public class Main {
             arrayOfColor[i] = new Color(r,g,b);
         }
 
-        DrawGraph frame = new DrawGraph(m);
+        DrawGraph frame = new DrawGraph();
         frame.setTitle("Game Board");
         frame.setSize(1200,1100);
         frame.getContentPane().setBackground(Color.WHITE);

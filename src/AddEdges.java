@@ -6,7 +6,7 @@ public class AddEdges implements Runnable{
     private String name;
     private String id;
     private Color[] colors;
-    boolean exit = false;
+    static boolean exit = false;
 
     public AddEdges (DrawGraph graph, Color[] colors){
         this.graph = graph;

@@ -48,11 +48,14 @@ public class Main {
         }
         pool.shutdown();
         System.out.println("Times Up!");
-        System.out.println(addEdges.threadList);
-        new ThreadCountTable(addEdges.threadList, t, COLORS);
-
         
-        
+        /* Create a ThreadCountTable to display each successful thread created how many lines*/
+        ThreadCountTable table = new ThreadCountTable(addEdges.threadList, t, COLORS);
+        JScrollPane sp = new JScrollPane(table.getTable());  
+        JFrame boardTable = new JFrame();
+        boardTable.add(sp);
+        boardTable.setSize(300,400); 
+        boardTable.setVisible(true);
     }
 
 }

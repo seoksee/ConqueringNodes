@@ -13,23 +13,22 @@ import javax.swing.*;
  * @author Jia Kai
  */
 public class ThreadCountTable {
-    JFrame frame;
+    JTable threadCountTable;
     private String data[][];
     private Color[] colors;
 
     
     public ThreadCountTable(List<String> list, int t, Color[] colors){
         data = new String[t][3];
-        frame =new JFrame();
         this.colors = colors;
         printEdgeTable(list);
         String column[]={"THREAD_ID", "COLOR", "COUNT"};         
-        JTable jt = new JTable(data,column);
-        jt.setBounds(30,40,200,300);       
-        JScrollPane sp = new JScrollPane(jt);    
-        frame.add(sp);        
-        frame.setSize(300,400);    
-        frame.setVisible(true);
+        threadCountTable = new JTable(data,column);
+        threadCountTable.setBounds(30,40,200,300);       
+    }
+    
+    public JTable getTable(){
+        return this.threadCountTable;
     }
     
     private void printEdgeTable(List<String> list){
@@ -47,7 +46,6 @@ public class ThreadCountTable {
                 }
                 if (!list.get(i).equals("0")) {  
                     data[index][0] = list.get(i);
-//                    System.out.println(colors[2].toString());
                     
                     data[index][1] = colors[Integer.parseInt(list.get(i).substring(list.get(i).length()-1))].toString();
                     

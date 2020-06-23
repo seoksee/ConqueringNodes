@@ -27,8 +27,9 @@ public class Main {
         
         String[] options = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         ImageIcon icon = new ImageIcon("src/images/thread.png");
-        String T = (String)JOptionPane.showInputDialog(null, "The number of THREADS to create, t: ", "Threads number",
-                JOptionPane.QUESTION_MESSAGE, icon, options, "2");
+        String T = (String)JOptionPane.showInputDialog(null, 
+                "The number of THREADS to create, t: \n (For better visualization, maximum number of thread is 9)",
+                "Threads number",JOptionPane.QUESTION_MESSAGE, icon, options, "2");
         
         
         /* Create JFrame to display DrawGraph */

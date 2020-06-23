@@ -1,3 +1,5 @@
+package GameBoard;
+
 import java.awt.*;
 
 public class Edge {

@@ -1,9 +1,10 @@
+package GameBoard;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 public class DrawGraph extends JPanel {

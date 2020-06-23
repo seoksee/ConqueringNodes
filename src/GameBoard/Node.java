@@ -1,3 +1,5 @@
+package GameBoard;
+
 import java.util.ArrayList;
 import java.util.Random;
 

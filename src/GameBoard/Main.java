@@ -1,9 +1,7 @@
+package GameBoard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Date;
-import java.util.Random;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -43,7 +41,7 @@ public class Main {
             }
         }
 
-        /* Create JFrame to display DrawGraph */
+        /* Create JFrame to display GameBoard.DrawGraph */
         DrawGraph panel = new DrawGraph(n);
         JScrollPane pane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         AddEdges addEdges = new AddEdges(panel, COLORS);
@@ -56,7 +54,7 @@ public class Main {
         gameBoard.setResizable(true);
         gameBoard.setVisible(true);
 
-        /* Create threadpool to execute Edge(Runnable Thread)*/
+        /* Create threadpool to execute GameBoard.Edge(Runnable Thread)*/
         ExecutorService pool = Executors.newFixedThreadPool(t);
         long startTime = System.currentTimeMillis();
         long elapsedTime = 0L;
@@ -67,7 +65,7 @@ public class Main {
         pool.shutdown();
         System.out.println("Times Up!");
 
-        /* Create a ThreadCountTable to display each successful thread created how many lines*/
+        /* Create a GameBoard.ThreadCountTable to display each successful thread created how many lines*/
         ThreadCountTable table = new ThreadCountTable(addEdges.threadList, t, COLORS);
         JScrollPane sp = new JScrollPane(table.getTable());
         JFrame boardTable = new JFrame();

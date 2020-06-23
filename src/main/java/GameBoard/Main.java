@@ -4,28 +4,41 @@ import java.awt.*;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 public class Main {
     
     public static final Color[] COLORS = {
-        Color.GREEN,Color.RED,Color.MAGENTA, Color.YELLOW, 
-        Color.BLACK, Color.BLUE, Color.DARK_GRAY, Color.PINK, Color.CYAN
+        Color.DARK_GRAY,Color.RED,Color.MAGENTA, Color.YELLOW, 
+        Color.BLACK, Color.BLUE, Color.GREEN, Color.PINK, Color.CYAN
     };
     
     public static void main(String[] args) {
         
         /* Get input from user*/
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter n: ");
-        int n = input.nextInt();
-        System.out.print("Enter m (in seconds): ");
-        int m = input.nextInt();
-        System.out.print("Enter t: ");
-        int t = input.nextInt();
+        String N = JOptionPane.showInputDialog(
+                              null, "The number of NODES to create, n: ", 19);
+        
+        String M = JOptionPane.showInputDialog(
+                              null, "How many seconds to run, m: ", 1);
+        
+        String[] options = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        ImageIcon icon = new ImageIcon("src/images/thread.png");
+        String T = (String)JOptionPane.showInputDialog(null, "The number of THREADS to create, t: ", "Threads number",
+                JOptionPane.QUESTION_MESSAGE, icon, options, "2");
+        
+        
         /* Create JFrame to display DrawGraph */
+        int n = 0, m = 0,t = 0;
+        try {
+            n = Integer.parseInt(N);
+            m = Integer.parseInt(M);
+            t = Integer.parseInt(T);
+        } catch (NumberFormatException e) {
+        }
         DrawGraph panel = new DrawGraph(n);
         JScrollPane pane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         AddEdges addEdges = new AddEdges(panel, COLORS);

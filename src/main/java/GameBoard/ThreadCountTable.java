@@ -21,10 +21,11 @@ public class ThreadCountTable {
     public ThreadCountTable(List<String> list, int t, Color[] colors){
         data = new String[t][3];
         frame =new JFrame();
+        this.colors = colors;
         printEdgeTable(list);
-        String column[]={"THREAD_ID","COLOR", "COUNT"};         
-        JTable jt = new JTable(data,column);    
-        jt.setBounds(30,40,200,300);          
+        String column[]={"THREAD_ID", "COLOR", "COUNT"};         
+        JTable jt = new JTable(data,column);
+        jt.setBounds(30,40,200,300);       
         JScrollPane sp = new JScrollPane(jt);    
         frame.add(sp);        
         frame.setSize(300,400);    
@@ -46,9 +47,12 @@ public class ThreadCountTable {
                 }
                 if (!list.get(i).equals("0")) {  
                     data[index][0] = list.get(i);
-                    System.out.println(Integer.parseInt(list.get(i).substring(list.get(i).length()-1)));
+//                    System.out.println(colors[2].toString());
+                    
                     data[index][1] = colors[Integer.parseInt(list.get(i).substring(list.get(i).length()-1))].toString();
+                    
                     data[index++][2] = Integer.toString(count);
+                    
                 }
                 count = 1;
             }

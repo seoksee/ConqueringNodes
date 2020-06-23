@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public class DrawGraph extends JFrame {
+public class DrawGraph extends JPanel {
     private ArrayList<Node> nodes = new ArrayList<Node>();
     private ArrayList<Edge> edges = new ArrayList<Edge>();
     Random rand = new Random();
 
-    public DrawGraph(){
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public DrawGraph(int num){
+        CreateNodes(num);
     }
 
     public void CreateNodes (int num){
@@ -59,14 +59,10 @@ public class DrawGraph extends JFrame {
     }
 
     public boolean uniqueCoordinates (float x, float y, ArrayList<Node> nodes){
-        for(Node n:nodes){
-            if(x==n.x && y==n.y){
-                return false;
-            }
-        }
-        return true;
+        return nodes.stream().noneMatch((n) -> (x==n.x && y==n.y));
     }
 
+    @Override
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
@@ -75,16 +71,17 @@ public class DrawGraph extends JFrame {
 
         g2d.setStroke(new BasicStroke(2));
         super.paint(g2d);
-        for (Node n: nodes){
+        nodes.forEach((n) -> {
             Ellipse2D.Float circle = new Ellipse2D.Float((n.x-5),(n.y-5),10f,10f);
             g2d.fill(circle);
             System.out.println(n.x + ", " + n.y);
-        }
+        });
 
-        for (Edge e: edges){
+        edges.forEach((e) -> {
             Shape line = new Line2D.Float(nodes.get(e.i).x, nodes.get(e.i).y, nodes.get(e.j).x, nodes.get(e.j).y);
             g2d.setColor(e.color.brighter());
             g2d.draw(line);
-        }
+
+        });
     }
 }

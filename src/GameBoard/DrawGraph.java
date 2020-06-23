@@ -56,6 +56,7 @@ public class DrawGraph extends JPanel {
             System.out.println(t.getName() + " has more than 20 attempts.");
          return true;
         }
+        this.repaint();
     return false;
     }
 

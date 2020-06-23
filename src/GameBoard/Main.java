@@ -8,8 +8,12 @@ import java.util.concurrent.Executors;
 public class Main {
 
     public static final Color[] COLORS = {
-            Color.DARK_GRAY,Color.RED,Color.MAGENTA, Color.YELLOW,
-            Color.BLACK, Color.BLUE, Color.GREEN, Color.PINK, Color.CYAN
+            Color.DARK_GRAY,Color.RED,Color.BLUE, Color.YELLOW,
+            Color.BLACK, Color.MAGENTA, Color.GREEN, Color.WHITE, Color.CYAN
+    };
+
+    public static final String[] namesOfColors = {
+      "Dark Gray", "Red", "Blue", "Yellow", "Black", "Magenta", "Green", "White", "Cyan"
     };
 
     public static void main(String[] args) {
@@ -18,10 +22,11 @@ public class Main {
         /* Get input from user*/
         while (true) {
             String N = JOptionPane.showInputDialog(
-                    null, "The number of NODES to create, n: ", 19);
+                    null, "The number of NODES to create, n: ");
 
             String M = JOptionPane.showInputDialog(
-                    null, "How many seconds to run, m: ", 1);
+                    null, "How many seconds to run, m: "
+            );
 
             String[] options = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
             ImageIcon icon = new ImageIcon("src/images/thread.png");
@@ -43,15 +48,15 @@ public class Main {
 
         /* Create JFrame to display GameBoard.DrawGraph */
         DrawGraph panel = new DrawGraph(n);
-        JScrollPane pane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        JScrollPane pane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         AddEdges addEdges = new AddEdges(panel, COLORS);
         JFrame gameBoard = new JFrame();
         gameBoard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameBoard.add(pane);
+        gameBoard.add(panel);
         gameBoard.setTitle("Game Board");
-        gameBoard.setSize(1200,1100);
+        gameBoard.setSize(1100,1060);
         gameBoard.getContentPane().setBackground(Color.decode("#d3d3d3"));
-        gameBoard.setResizable(true);
+        gameBoard.setResizable(false);
         gameBoard.setVisible(true);
 
         /* Create threadpool to execute GameBoard.Edge(Runnable Thread)*/
@@ -66,11 +71,11 @@ public class Main {
         System.out.println("Times Up!");
 
         /* Create a GameBoard.ThreadCountTable to display each successful thread created how many lines*/
-        ThreadCountTable table = new ThreadCountTable(addEdges.threadList, t, COLORS);
+        ThreadCountTable table = new ThreadCountTable(addEdges.threadList, t, namesOfColors);
         JScrollPane sp = new JScrollPane(table.getTable());
         JFrame boardTable = new JFrame();
         boardTable.add(sp);
-        boardTable.setSize(300,400);
+        boardTable.setSize(400,300);
         boardTable.setVisible(true);
     }
 }

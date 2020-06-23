@@ -7,10 +7,10 @@ import java.util.List;
 public class ThreadCountTable {
     JTable threadCountTable;
     private String data[][];
-    private Color[] colors;
+    private String[] colors;
 
 
-    public ThreadCountTable(List<String> list, int t, Color[] colors){
+    public ThreadCountTable(List<String> list, int t, String[] colors){
         data = new String[t][3];
         this.colors = colors;
         printEdgeTable(list);
@@ -39,7 +39,7 @@ public class ThreadCountTable {
                 if (!list.get(i).equals("0")) {
                     data[index][0] = list.get(i);
 
-                    data[index][1] = colors[Integer.parseInt(list.get(i).substring(list.get(i).length()-1))].toString();
+                    data[index][1] = colors[Integer.parseInt(list.get(i).substring(list.get(i).length()-1))];
 
                     data[index++][2] = Integer.toString(count);
 

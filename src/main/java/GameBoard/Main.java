@@ -17,29 +17,35 @@ public class Main {
     };
     
     public static void main(String[] args) {
+        int n = 0, m = 0,t = 0;
         
         /* Get input from user*/
-        String N = JOptionPane.showInputDialog(
+        while (true) {
+            String N = JOptionPane.showInputDialog(
                               null, "The number of NODES to create, n: ", 19);
         
-        String M = JOptionPane.showInputDialog(
-                              null, "How many seconds to run, m: ", 1);
-        
-        String[] options = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-        ImageIcon icon = new ImageIcon("src/images/thread.png");
-        String T = (String)JOptionPane.showInputDialog(null, 
-                "The number of THREADS to create, t: \n (For better visualization, maximum number of thread is 9)",
-                "Threads number",JOptionPane.QUESTION_MESSAGE, icon, options, "2");
-        
+            String M = JOptionPane.showInputDialog(
+                                  null, "How many seconds to run, m: ", 1);
+
+            String[] options = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+            ImageIcon icon = new ImageIcon("src/images/thread.png");
+            String T = (String)JOptionPane.showInputDialog(null, 
+                    "The number of THREADS to create, t: \n (For better visualization, maximum number of thread is 9)",
+                    "Threads number",JOptionPane.QUESTION_MESSAGE, icon, options, "2");
+
+            try {
+                n = Integer.parseInt(N);
+                m = Integer.parseInt(M);
+                t = Integer.parseInt(T);
+                break;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,
+                    "Input should be an integer",
+                    "Number Format Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
         
         /* Create JFrame to display DrawGraph */
-        int n = 0, m = 0,t = 0;
-        try {
-            n = Integer.parseInt(N);
-            m = Integer.parseInt(M);
-            t = Integer.parseInt(T);
-        } catch (NumberFormatException e) {
-        }
         DrawGraph panel = new DrawGraph(n);
         JScrollPane pane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         AddEdges addEdges = new AddEdges(panel, COLORS);

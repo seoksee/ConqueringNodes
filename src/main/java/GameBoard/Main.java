@@ -1,7 +1,6 @@
 package GameBoard;
 
 import java.awt.*;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.swing.ImageIcon;

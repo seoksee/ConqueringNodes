@@ -12,9 +12,6 @@ public final class DrawGraph extends JPanel {
     private ArrayList<Edge> edges = new ArrayList<>();
     private Random rand = new Random();
 
-//    public DrawGraph(){
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//    }
     public DrawGraph(int num){
         CreateNodes(num);
     }
